@@ -8,8 +8,8 @@ public class PlayerMover : MonoBehaviour
     private const string HORIZONTAL_AXIS = "Horizontal";
     private const string VERTICAL_AXIS = "Vertical";
     
-    [SerializeField] private float _speed = 1;
-    [SerializeField] private float _force = 20;
+    [SerializeField] private float _speed = 2;
+    [SerializeField] private float _force = 2000;
     
     private Rigidbody2D _rb;
     private float _directionX;
@@ -36,12 +36,13 @@ public class PlayerMover : MonoBehaviour
         var x = _speed * _directionX * SPEED_COEFFICIENT * Time.deltaTime;
         var y = _speed * _directionY * SPEED_COEFFICIENT * Time.deltaTime;
 
+        
+        _rb.velocity = new Vector2(x, y);
+        
         if (_isAddForce)
         {
-            x *= _force;
-            y *= _force;
+            _rb.AddForce(_rb.velocity * _force);
             _isAddForce = false;
         }
-        _rb.velocity = new Vector2(x, y);
     }
 }
