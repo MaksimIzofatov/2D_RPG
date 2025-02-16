@@ -6,7 +6,7 @@
     public class CollisionHandlers : MonoBehaviour
     {
         public event Action<IInteractable> InteractableObjectIsNear;
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D (Collider2D other)
         {
             if(other.gameObject.TryGetComponent(out IInteractable value))
             {
@@ -14,7 +14,7 @@
             }
         }
         
-        private void OnCollisionExit2D(Collision2D other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if(other.gameObject.TryGetComponent(out IInteractable _))
             {
