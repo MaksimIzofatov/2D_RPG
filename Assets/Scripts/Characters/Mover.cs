@@ -7,7 +7,7 @@ public class Mover : MonoBehaviour
     private const int SPEED_COEFFICIENT = 50;
     
     [SerializeField] private float _speed = 5;
-    [SerializeField] private float _force = 1000;
+    [SerializeField] private float _force = 10;
     
     private Rigidbody2D _rb;
 
@@ -19,7 +19,7 @@ public class Mover : MonoBehaviour
     
     public void AddForce()
     {
-        _rb.AddForce(_rb.velocity * _force);
+        _rb.AddForce(_rb.velocity * _force, ForceMode2D.Impulse);
     }
 
     public void Move(float directionX, float directionY)
@@ -42,4 +42,7 @@ public class Mover : MonoBehaviour
         var direction = (target.position - transform.position).normalized;
         return direction;
     }
+
+    public void SetSpeedWalk() => _speed = 2;
+    public void SetSpeedRun() => _speed = 5;
 }

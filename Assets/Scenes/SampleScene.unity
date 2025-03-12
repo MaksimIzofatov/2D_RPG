@@ -52289,6 +52289,7 @@ MonoBehaviour:
   - {fileID: 2021805030}
   - {fileID: 818487465}
   _waitTime: 2
+  _maxSqrDistance: 0.03
 --- !u!114 &826087198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52317,8 +52318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c8df6d7eb6f0744afdec2738b36318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.5
-  _force: 1000
+  _speed: 3
+  _force: 0
 --- !u!1 &834055125
 GameObject:
   m_ObjectHideFlags: 0
@@ -94806,7 +94807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _force: 1000
+  _force: 10
 --- !u!114 &1645841325
 MonoBehaviour:
   m_ObjectHideFlags: 0
