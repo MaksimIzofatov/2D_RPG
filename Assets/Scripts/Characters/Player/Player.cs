@@ -1,6 +1,3 @@
-
-using System;
-using Level;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader), typeof(Mover), typeof(PlayerAnimator))]

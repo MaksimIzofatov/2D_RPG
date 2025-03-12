@@ -1,5 +1,4 @@
 
-    using Level;
     using UnityEngine;
 
     public class Door : MonoBehaviour, IInteractable

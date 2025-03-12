@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Mover : MonoBehaviour
 {
     private const int SPEED_COEFFICIENT = 50;
     
-    [SerializeField] private float _speed = 5;
+    [SerializeField] private float _speedWalk = 2;
+    [SerializeField] private float _speedRun = 5;
     [SerializeField] private float _force = 10;
     
     private Rigidbody2D _rb;
@@ -24,16 +26,16 @@ public class Mover : MonoBehaviour
 
     public void Move(float directionX, float directionY)
     {
-        var x = _speed * directionX * SPEED_COEFFICIENT * Time.deltaTime;
-        var y = _speed * directionY * SPEED_COEFFICIENT * Time.deltaTime;
+        var x = _speedRun * directionX * SPEED_COEFFICIENT * Time.deltaTime;
+        var y = _speedRun * directionY * SPEED_COEFFICIENT * Time.deltaTime;
         
         _rb.velocity = new Vector2(x, y);
     }
     
-    public void Move(Transform target)
+    private void Move(Transform target, float speed)
     {
         var newPosition = Vector2.MoveTowards(transform.position, target.position, 
-            _speed * Time.fixedDeltaTime);
+            speed * Time.fixedDeltaTime);
         _rb.MovePosition(newPosition);
     }
     
@@ -43,6 +45,6 @@ public class Mover : MonoBehaviour
         return direction;
     }
 
-    public void SetSpeedWalk() => _speed = 2;
-    public void SetSpeedRun() => _speed = 5;
+    public void SetSpeedWalk(Transform target) => Move(target, _speedWalk);
+    public void SetSpeedRun(Transform target) =>Move(target, _speedRun);
 }

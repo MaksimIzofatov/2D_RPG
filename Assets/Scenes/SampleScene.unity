@@ -52318,7 +52318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c8df6d7eb6f0744afdec2738b36318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speedWalk: 2
+  _speedRun: 5
   _force: 0
 --- !u!1 &834055125
 GameObject:
@@ -94562,11 +94563,11 @@ GameObject:
   - component: {fileID: 1645841315}
   - component: {fileID: 1645841320}
   - component: {fileID: 1645841321}
-  - component: {fileID: 1645841325}
-  - component: {fileID: 1645841324}
   - component: {fileID: 1645841323}
   - component: {fileID: 1645841322}
   - component: {fileID: 1645841326}
+  - component: {fileID: 1645841325}
+  - component: {fileID: 1645841324}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -94790,25 +94791,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1645841313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5bae4bd665a54b4ab883467aee044de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1645841321}
---- !u!114 &1645841324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645841313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60c8df6d7eb6f0744afdec2738b36318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speedWalk: 2
+  _speedRun: 5
   _force: 10
---- !u!114 &1645841325
+--- !u!114 &1645841324
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94820,6 +94809,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf00d0773d7440849d2a81e4c6083081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1645841325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645841313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bae4bd665a54b4ab883467aee044de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1645841321}
 --- !u!114 &1645841326
 MonoBehaviour:
   m_ObjectHideFlags: 0
