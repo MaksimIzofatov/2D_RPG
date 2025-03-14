@@ -6,6 +6,7 @@ using UnityEngine;
         public float DirectionY{get; private set;}
         private bool _isAddForce;
         private bool _isInteract;
+        private bool _isAttacking;
         
         private const string HORIZONTAL_AXIS = "Horizontal";
         private const string VERTICAL_AXIS = "Vertical";
@@ -24,11 +25,17 @@ using UnityEngine;
             {
                 _isInteract = true;
             }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _isAttacking = true;
+            }
         }
         
         public bool GetIsAddForce() => GetBoolAsTriggers(ref _isAddForce);
         
         public bool GetIsInteract() => GetBoolAsTriggers(ref _isInteract);
+        public bool GetIsAttack() => GetBoolAsTriggers(ref _isAttacking);
 
         private bool GetBoolAsTriggers(ref bool value)
         {
