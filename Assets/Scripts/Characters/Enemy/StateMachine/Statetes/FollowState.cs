@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public class FollowState : State
+public class FollowState : State, IMoveState
 {
+    public Transform Target => _target;
+    
     private EnemyVision _vision;
     private Transform _target;
     private bool _isSeeTarget;
-    public FollowState(StateMachine stateMachine, Animator animator, Mover mover, EnemyVision vision) : base(stateMachine, animator, mover)
+    public FollowState(StateMachine stateMachine, Animator animator, Mover mover, EnemyVision vision, float sqrAttackDistance) 
+        : base(stateMachine, animator, mover)
     {
         _vision = vision;
 
         Transitions = new Transition[]
         {
             new LossTargetTransition(stateMachine, vision),
+            new TargetReachedTransition(stateMachine, this, mover.transform, sqrAttackDistance)
         };
     }
 
@@ -35,4 +39,5 @@ public class FollowState : State
         _isSeeTarget = false;
         Animator.SetBool(GlobalConstants.AnimatorParameters.follow, _isSeeTarget);
     }
+
 }

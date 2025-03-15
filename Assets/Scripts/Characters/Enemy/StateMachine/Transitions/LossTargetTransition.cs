@@ -15,6 +15,7 @@ public class LossTargetTransition : Transition
 
     public override void Transit()
     {
+        base.Transit();
         StateMachine.ChangeState<IdleState>();
     }
 }

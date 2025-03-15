@@ -57,7 +57,7 @@ using UnityEngine;
                 _interactable.Interact();
             }
 
-            if (_input.GetIsAttack())
+            if (_input.GetIsAttack() && _attacker.CanAttack)
             {
                 _attacker.Attack();
             }
@@ -71,6 +71,7 @@ using UnityEngine;
         public void ApplyDamage(int damage)
         {
             _health.ApplyDamage(damage);
+            Debug.Log(_health.CurrentHealth);
         }
 
         public void ApplyHeal(int heal)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PatrolState : State
+public class PatrolState : State, IMoveState
 {
     private WayPoints[] _wayPoints;
     private int _wayPointIndex;
@@ -8,15 +8,15 @@ public class PatrolState : State
     private bool _isWaiting;
     
     public PatrolState(StateMachine stateMachine, Animator animator, EnemyVision vision, Mover mover, 
-        WayPoints[] wayPoints, Transform transform, float maxSqrDistance) : base(stateMachine, animator, mover)
+        WayPoints[] wayPoints, Transform transform, float maxSqrDistance, float sqrAttackDistance) : base(stateMachine, animator, mover)
     {
         _wayPoints = wayPoints;
         _wayPointIndex = -1;
 
         Transitions = new Transition[]
         {
-            new SeeTargetTransition(stateMachine, vision),
-            new TargetReachedTransition(stateMachine, this, transform, maxSqrDistance)
+            new SeeTargetTransition(stateMachine, vision, mover.transform, sqrAttackDistance),
+            new WayPointReachedTransition(stateMachine, this, transform, maxSqrDistance)
         };
     }
 
