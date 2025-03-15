@@ -13,6 +13,7 @@ public class EndIdleTransition : Transition
 
     public override void Transit()
     {
+        base.Transit();
         StateMachine.ChangeState<PatrolState>();
     }
 }

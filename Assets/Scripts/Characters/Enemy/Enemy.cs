@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(EnemyVision), typeof(Mover))]
+[RequireComponent(typeof(EnemyVision), typeof(Mover), typeof(EnemyAttacker))]
 public class Enemy : MonoBehaviour
     {
     
@@ -25,8 +25,8 @@ public class Enemy : MonoBehaviour
             var animator = GetComponent<Animator>();
             var vision = GetComponent<EnemyVision>();
             var mover = GetComponent<Mover>();
-            
-            _stateMachine = new EnemyStateMachine(animator, vision, mover, _wayPoints, transform, _maxSqrDistance, _waitTime);
+            var attacker = GetComponent<EnemyAttacker>();
+            _stateMachine = new EnemyStateMachine(animator, vision, mover, _wayPoints, transform, _maxSqrDistance, _waitTime, attacker);
         }
 
         private void FixedUpdate()

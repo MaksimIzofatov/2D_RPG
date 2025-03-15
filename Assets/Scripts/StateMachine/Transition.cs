@@ -8,5 +8,8 @@ public abstract class Transition
     }
 
     public abstract bool IsNeedTransit();
-    public abstract void Transit();
+
+    public virtual void Transit()
+    {
+    }
 }
