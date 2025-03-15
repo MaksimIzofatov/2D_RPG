@@ -1,20 +1,23 @@
-
-    using System;
     using UnityEngine;
 
-    public class PlayerAttacker : Attacker
+    public abstract class Attacker : MonoBehaviour
     {
-        public override void Attack()
+        [SerializeField] protected float _seeRadius = 0.75f;
+        [SerializeField] protected LayerMask _targetLayer;
+        [SerializeField] protected int _damage = 1;
+
+        protected Vector3 _offsetAttackSphere =  Vector3.zero;
+        protected Animator _animator;
+        
+
+        private void Start()
         {
-            _animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
-            _animator.SetFloat(GlobalConstants.AnimatorParameters.dirAttackX, _offsetAttackSphere.x);
-            _animator.SetFloat(GlobalConstants.AnimatorParameters.dirAttackY, _offsetAttackSphere.y);
-            var enemy = Physics2D.OverlapCircle(transform.position + _offsetAttackSphere, 
-                _seeRadius, _targetLayer);
-            enemy?.GetComponent<Enemy>().ApplyDamage(_damage);
+            _animator = GetComponent<Animator>();
         }
 
-        public void ChangeDirectionForAttack(float x, float y)
+        public abstract void Attack();
+
+        public virtual void ChangeDirectionForAttack(float x, float y)
         {
             if (x > 0.05f)
             {

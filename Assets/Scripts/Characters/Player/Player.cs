@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionHandlers), (typeof(PlayerAttacker)))]
     public class Player : MonoBehaviour
     {
+        [SerializeField] private int _maxHealth = 20;
+        
         private Mover _mover;
         private InputReader _input;
         private PlayerAnimator _animator;
@@ -11,9 +13,15 @@ using UnityEngine;
         private PlayerAttacker _attacker;
         
         private IInteractable _interactable;
+        private Health _health;
+
+   
+     
 
         private void Awake()
         {
+            _health = new(_maxHealth);  
+            
             _mover = GetComponent<Mover>();
             _input = GetComponent<InputReader>();
             _animator = GetComponent<PlayerAnimator>();
@@ -58,5 +66,15 @@ using UnityEngine;
         private void OnInteractableObjectIsNear(IInteractable interactable)
         {
             _interactable = interactable;
+        }
+        
+        public void ApplyDamage(int damage)
+        {
+            _health.ApplyDamage(damage);
+        }
+
+        public void ApplyHeal(int heal)
+        {
+            _health.ApplyHeal(heal);
         }
     }
