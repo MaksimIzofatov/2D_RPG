@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(EnemyVision), typeof(Mover))]
 public class Enemy : MonoBehaviour
@@ -8,10 +10,15 @@ public class Enemy : MonoBehaviour
         [SerializeField] private WayPoints[] _wayPoints;
         [SerializeField] private float _waitTime = 2;
         [SerializeField] private float _maxSqrDistance = 0.03f;
-        [SerializeField] private float _maxHealth = 5;
+        [SerializeField] private int _maxHealth = 5;
         
         private EnemyStateMachine _stateMachine;
-        private float _currentHealth;
+        private Health _health;
+
+        private void Awake()
+        {
+            _health = new(_maxHealth);
+        }
 
         private void Start()
         {
@@ -20,7 +27,6 @@ public class Enemy : MonoBehaviour
             var mover = GetComponent<Mover>();
             
             _stateMachine = new EnemyStateMachine(animator, vision, mover, _wayPoints, transform, _maxSqrDistance, _waitTime);
-            _currentHealth = _maxHealth;
         }
 
         private void FixedUpdate()
@@ -28,15 +34,11 @@ public class Enemy : MonoBehaviour
             _stateMachine.Update();
         }
 
-        public void ApplyDamage(float damage)
+        public void ApplyDamage(int damage)
         {
-            if (_currentHealth <= 0)
-            {
-                _currentHealth = 0;
-                return;
-            }
-            
-            _currentHealth -= damage;
-            Debug.Log(_currentHealth);
+           _health.ApplyDamage(damage);
+           
+           if(_health.CurrentHealth <= 0)
+               Destroy(gameObject);
         }
     }

@@ -52290,7 +52290,7 @@ MonoBehaviour:
   - {fileID: 818487465}
   _waitTime: 2
   _maxSqrDistance: 0.03
-  _maxHealth: 5
+  _maxHealth: 10
 --- !u!114 &826087198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94784,6 +94784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482a8d29ac1043068f755fca7a9c36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 20
 --- !u!114 &1645841323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94852,7 +94853,7 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 128
-  _damage: 1
+  _damage: 2
 --- !u!1 &1658923591
 GameObject:
   m_ObjectHideFlags: 0
