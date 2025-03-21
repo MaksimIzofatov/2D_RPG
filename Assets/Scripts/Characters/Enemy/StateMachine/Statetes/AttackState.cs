@@ -30,12 +30,17 @@
         {
             if (_attacker.CanAttack)
             {
-                _attacker.Attack();
+                _attacker.StartAttack();
                 Animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
             }
         }
 
-      
+        public override void TryTransit()
+        {
+            
+                base.TryTransit();
+        }
+
 
         private void ResetAnimations()
         {

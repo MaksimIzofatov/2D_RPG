@@ -52065,6 +52065,7 @@ GameObject:
   - component: {fileID: 826087198}
   - component: {fileID: 826087199}
   - component: {fileID: 826087200}
+  - component: {fileID: 826087201}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -52242,6 +52243,7 @@ MonoBehaviour:
   _waitTime: 2
   _maxSqrDistance: 0.03
   _maxHealth: 10
+  _enemyAnimationEvent: {fileID: 826087201}
 --- !u!114 &826087198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52285,13 +52287,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac2e1e6697f49f08b37838c33bcc097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 2
+  _delay: 3
   _seeRadius: 1.5
   _targetLayer:
     serializedVersion: 2
     m_Bits: 64
   _damage: 1
   _distance: 1.5
+--- !u!114 &826087201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826087191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeda01322e045dcbbd6216502cb3e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &834055125
 GameObject:
   m_ObjectHideFlags: 0
@@ -94609,7 +94623,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.8033917
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

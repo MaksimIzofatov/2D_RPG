@@ -3,17 +3,25 @@
     public class EnemyAttacker : Attacker
     {
         private float _endAttackTime;
-        public bool IsAttack => _endAttackTime > Time.time;
+        public bool IsAttack { get; private set; }
         
         public override void Attack()
         {
-            base.Attack();
-            ////
-            _endAttackTime = Time.time + 1;
-            ////
-            _animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
+            
+            
             var player = Physics2D.OverlapCircle(transform.position + _offsetAttackSphere, 
                 _seeRadius, _targetLayer);
             player?.GetComponent<Player>().ApplyDamage(_damage);
+        }
+
+        public void StartAttack()
+        {
+            IsAttack = true;
+            _endWaitTime = Time.time + _delay;
+        }
+
+        public void OnEndAttack()
+        {
+            IsAttack = false;
         }
     }

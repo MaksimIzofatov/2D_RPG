@@ -11,13 +11,16 @@ public class Enemy : MonoBehaviour
         [SerializeField] private float _waitTime = 2;
         [SerializeField] private float _maxSqrDistance = 0.03f;
         [SerializeField] private int _maxHealth = 5;
+        [SerializeField] private EnemyAnimationEvent _enemyAnimationEvent;
         
         private EnemyStateMachine _stateMachine;
         private Health _health;
+        private EnemyAttacker _attacker;
 
         private void Awake()
         {
             _health = new(_maxHealth);
+            
         }
 
         private void Start()
@@ -25,8 +28,18 @@ public class Enemy : MonoBehaviour
             var animator = GetComponent<Animator>();
             var vision = GetComponent<EnemyVision>();
             var mover = GetComponent<Mover>();
-            var attacker = GetComponent<EnemyAttacker>();
-            _stateMachine = new EnemyStateMachine(animator, vision, mover, _wayPoints, transform, _maxSqrDistance, _waitTime, attacker);
+            _attacker = GetComponent<EnemyAttacker>();
+            
+            _enemyAnimationEvent.Attack += _attacker.Attack;
+            _enemyAnimationEvent.EndAttack += _attacker.OnEndAttack;
+            
+            _stateMachine = new EnemyStateMachine(animator, vision, mover, _wayPoints, transform, _maxSqrDistance, _waitTime, _attacker);
+        }
+
+        private void OnDestroy()
+        {
+            _enemyAnimationEvent.Attack -= _attacker.Attack;
+            _enemyAnimationEvent.EndAttack -= _attacker.OnEndAttack;
         }
 
         private void FixedUpdate()
