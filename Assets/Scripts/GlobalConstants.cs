@@ -13,8 +13,11 @@
             public static readonly int walkY = Animator.StringToHash(nameof(walkY));
             public static readonly int isDirX = Animator.StringToHash(nameof(isDirX));
             public static readonly int isAttack = Animator.StringToHash(nameof(isAttack));
+            public static readonly int isHit = Animator.StringToHash(nameof(isHit));
             public static readonly int dirAttackX = Animator.StringToHash(nameof(dirAttackX));
             public static readonly int dirAttackY = Animator.StringToHash(nameof(dirAttackY));
+            public static readonly int previousDirY = Animator.StringToHash(nameof(previousDirY));
+            public static readonly int previousDirX = Animator.StringToHash(nameof(previousDirX));
         }
 
         public static class Tags

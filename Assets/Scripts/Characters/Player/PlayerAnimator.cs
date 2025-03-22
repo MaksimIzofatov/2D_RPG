@@ -18,4 +18,19 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator.SetBool(GlobalConstants.AnimatorParameters.runXY, isTrue);
     }
+
+    public void SetHit()
+    {
+        _animator.SetTrigger(GlobalConstants.AnimatorParameters.isHit);
+    }
+
+    public void SetPreviousDirectionX(float directionX)
+    {
+        _animator.SetFloat(GlobalConstants.AnimatorParameters.previousDirX, directionX);
+    }
+
+    public void SetPreviousDirectionY( float directionY)
+    {
+        _animator.SetFloat(GlobalConstants.AnimatorParameters.previousDirY, directionY);
+    }
 }

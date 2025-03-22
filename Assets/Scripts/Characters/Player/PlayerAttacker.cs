@@ -4,9 +4,16 @@
 
     public class PlayerAttacker : Attacker
     {
+        private Animator _animator;
+
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+        }
+        
         public override void Attack()
         {
-            base.Attack();
+            _endWaitTime = Time.time + _delay;
             _animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
             _animator.SetFloat(GlobalConstants.AnimatorParameters.dirAttackX, _offsetAttackSphere.x);
             _animator.SetFloat(GlobalConstants.AnimatorParameters.dirAttackY, _offsetAttackSphere.y);

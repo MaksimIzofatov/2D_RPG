@@ -11,18 +11,10 @@
         public bool CanAttack => _endWaitTime <= Time.time;
         public float SqrDistance => _distance * _distance;
         protected Vector3 _offsetAttackSphere =  Vector3.zero;
-        protected Animator _animator;
         protected float _endWaitTime;
 
-        private void Start()
-        {
-            _animator = GetComponent<Animator>();
-        }
 
-        public virtual void Attack()
-        {
-            _endWaitTime = Time.time + _delay;
-        }
+        public abstract void Attack();
 
         public virtual void ChangeDirectionForAttack(float x, float y)
         {

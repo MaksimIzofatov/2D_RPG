@@ -30,17 +30,14 @@
         {
             if (_attacker.CanAttack)
             {
-                _attacker.Attack();
+                _attacker.StartAttack();
                 Animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
             }
         }
-
-      
-
+        
         private void ResetAnimations()
         {
             Animator.SetFloat(GlobalConstants.AnimatorParameters.walkX, 0);
             Animator.SetFloat(GlobalConstants.AnimatorParameters.walkY, 0);
         }
-    
     }

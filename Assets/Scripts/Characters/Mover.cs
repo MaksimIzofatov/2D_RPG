@@ -11,6 +11,8 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _speedRun = 5;
     [SerializeField] private float _force = 10;
     
+    public Vector3 DirectionEnemy;
+    
     private Rigidbody2D _rb;
 
     private void Start()
@@ -42,6 +44,7 @@ public class Mover : MonoBehaviour
     public Vector3 CalculateDirection(Transform target)
     {
         var direction = (target.position - transform.position).normalized;
+        DirectionEnemy = direction;
         return direction;
     }
 
