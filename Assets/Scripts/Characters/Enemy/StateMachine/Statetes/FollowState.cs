@@ -7,6 +7,7 @@ public class FollowState : State, IMoveState
     private EnemyVision _vision;
     private Transform _target;
     private bool _isSeeTarget;
+    
     public FollowState(StateMachine stateMachine, Animator animator, Mover mover, EnemyVision vision, float sqrAttackDistance) 
         : base(stateMachine, animator, mover)
     {
@@ -39,5 +40,4 @@ public class FollowState : State, IMoveState
         _isSeeTarget = false;
         Animator.SetBool(GlobalConstants.AnimatorParameters.follow, _isSeeTarget);
     }
-
 }

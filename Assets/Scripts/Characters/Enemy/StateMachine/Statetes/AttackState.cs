@@ -34,18 +34,10 @@
                 Animator.SetTrigger(GlobalConstants.AnimatorParameters.isAttack);
             }
         }
-
-        public override void TryTransit()
-        {
-            
-                base.TryTransit();
-        }
-
-
+        
         private void ResetAnimations()
         {
             Animator.SetFloat(GlobalConstants.AnimatorParameters.walkX, 0);
             Animator.SetFloat(GlobalConstants.AnimatorParameters.walkY, 0);
         }
-    
     }

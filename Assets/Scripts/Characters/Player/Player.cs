@@ -14,6 +14,8 @@ using UnityEngine;
         
         private IInteractable _interactable;
         private Health _health;
+        private float _previousDirX;
+        private float _previousDirY;
 
    
      
@@ -32,18 +34,21 @@ using UnityEngine;
         private void OnEnable()
         {
             _collisionHandlers.InteractableObjectIsNear += OnInteractableObjectIsNear;
+            _health.TakingDamage += OnTakingDamage;
         }
 
 
         private void OnDisable()
         {
             _collisionHandlers.InteractableObjectIsNear -= OnInteractableObjectIsNear;
+            _health.TakingDamage -= OnTakingDamage;
         }
 
         private void FixedUpdate()
         {
             _mover.Move(_input.DirectionX, _input.DirectionY);
             _attacker.ChangeDirectionForAttack(_input.DirectionX, _input.DirectionY);
+            ChangeDirectionForHit(_input.DirectionX, _input.DirectionY);
             
             _animator.SetSpeedXY(_input.DirectionX != 0 && _input.DirectionY != 0);
             _animator.SetSpeedX(_input.DirectionX);
@@ -72,6 +77,37 @@ using UnityEngine;
         {
             _health.ApplyDamage(damage);
             Debug.Log(_health.CurrentHealth);
+        }
+
+        private void OnTakingDamage()
+        {
+            _animator.SetPreviousDirectionX(_previousDirX);
+            _animator.SetPreviousDirectionY(_previousDirY);
+            _animator.SetHit();
+        }
+        
+        private void ChangeDirectionForHit(float x, float y)
+        {
+            if (x > 0.05f)
+            {
+                _previousDirX = 1;
+                _previousDirY = 0;
+            }
+            else if (x < -0.05f)
+            {
+                _previousDirX = -1;
+                _previousDirY = 0;
+            }
+            else if (y > 0.05f)
+            {
+                _previousDirX = 0;
+                _previousDirY = 1;
+            }
+            else if (y < -0.05f)
+            {
+                _previousDirX = 0;
+                _previousDirY = -1;
+            }
         }
 
         public void ApplyHeal(int heal)

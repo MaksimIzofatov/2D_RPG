@@ -52275,6 +52275,7 @@ MonoBehaviour:
   _speedWalk: 2
   _speedRun: 3
   _force: 0
+  DirectionEnemy: {x: 0, y: 0, z: 0}
 --- !u!114 &826087200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94834,6 +94835,7 @@ MonoBehaviour:
   _speedWalk: 2
   _speedRun: 5
   _force: 10
+  DirectionEnemy: {x: 0, y: 0, z: 0}
 --- !u!114 &1645841324
 MonoBehaviour:
   m_ObjectHideFlags: 0

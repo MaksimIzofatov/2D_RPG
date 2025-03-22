@@ -1,8 +1,10 @@
 
+    using System;
     using UnityEngine;
 
     public class Health
     {
+        public event Action TakingDamage;
         public int MaxHealth { get; }
         public int CurrentHealth { get; private set; }
         public Health(int maxHealth)
@@ -15,6 +17,8 @@
         {
             if(damage < 0 ) return;
             ChangeValue(-damage);
+            
+            TakingDamage?.Invoke();
         }
 
         public void ApplyHeal(int heal)
