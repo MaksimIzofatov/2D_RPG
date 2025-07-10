@@ -46,6 +46,8 @@ using UnityEngine;
 
         private void FixedUpdate()
         {
+            if (TimeManager.IsPaused) return;
+            
             _mover.Move(_input.DirectionX, _input.DirectionY);
             _attacker.ChangeDirectionForAttack(_input.DirectionX, _input.DirectionY);
             ChangeDirectionForHit(_input.DirectionX, _input.DirectionY);

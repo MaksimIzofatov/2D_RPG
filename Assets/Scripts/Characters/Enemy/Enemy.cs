@@ -49,6 +49,8 @@ public class Enemy : MonoBehaviour
 
         private void FixedUpdate()
         {
+            if (TimeManager.IsPaused) return;
+            
             _stateMachine.Update();
         }
 
