@@ -5,6 +5,7 @@
     public class Health
     {
         public event Action TakingDamage;
+        public event Action Died;
         public int MaxHealth { get; }
         public int CurrentHealth { get; private set; }
         public Health(int maxHealth)
@@ -19,6 +20,11 @@
             ChangeValue(-damage);
             
             TakingDamage?.Invoke();
+
+            if (CurrentHealth == 0)
+            {
+                Died?.Invoke(); 
+            }
         }
 
         public void ApplyHeal(int heal)

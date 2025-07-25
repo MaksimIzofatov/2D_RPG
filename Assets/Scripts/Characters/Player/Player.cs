@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader), typeof(Mover), typeof(PlayerAnimator))]
 [RequireComponent(typeof(CollisionHandlers), (typeof(PlayerAttacker)))]
     public class Player : MonoBehaviour
     {
+        public event Action Died;
+        
         [SerializeField] private int _maxHealth = 20;
         
         private Mover _mover;
@@ -29,12 +32,19 @@ using UnityEngine;
             _animator = GetComponent<PlayerAnimator>();
             _collisionHandlers = GetComponent<CollisionHandlers>();
             _attacker = GetComponent<PlayerAttacker>();
+            
+        }
+
+        private void OnDied()
+        {
+            Died?.Invoke();
         }
 
         private void OnEnable()
         {
             _collisionHandlers.InteractableObjectIsNear += OnInteractableObjectIsNear;
             _health.TakingDamage += OnTakingDamage;
+            _health.Died += OnDied;
         }
 
 
@@ -42,6 +52,7 @@ using UnityEngine;
         {
             _collisionHandlers.InteractableObjectIsNear -= OnInteractableObjectIsNear;
             _health.TakingDamage -= OnTakingDamage;
+            _health.Died -= OnDied;
         }
 
         private void FixedUpdate()
