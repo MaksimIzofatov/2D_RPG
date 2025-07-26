@@ -8,6 +8,7 @@ using UnityEngine;
         public event Action Died;
         
         [SerializeField] private int _maxHealth = 20;
+        [SerializeField] private HealthBar _healthBar;
         
         private Mover _mover;
         private InputReader _input;
@@ -25,7 +26,8 @@ using UnityEngine;
 
         private void Awake()
         {
-            _health = new(_maxHealth);  
+            _health = new(_maxHealth); 
+            _healthBar.Initialize(_health);
             
             _mover = GetComponent<Mover>();
             _input = GetComponent<InputReader>();
@@ -89,7 +91,6 @@ using UnityEngine;
         public void ApplyDamage(int damage)
         {
             _health.ApplyDamage(damage);
-            Debug.Log(_health.CurrentHealth);
         }
 
         private void OnTakingDamage()
