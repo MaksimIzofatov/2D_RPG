@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-    public class InputReader : MonoBehaviour
+public class InputReader : MonoBehaviour
     {
         public float DirectionX{get; private set;}
         public float DirectionY{get; private set;}
@@ -13,6 +14,10 @@ using UnityEngine;
         
         private void Update()
         {
+            if (TimeManager.IsPaused) return;
+            
+            if(EventSystem.current.IsPointerOverGameObject()) return;
+            
             DirectionX = Input.GetAxis(HORIZONTAL_AXIS);
             DirectionY = Input.GetAxis(VERTICAL_AXIS);
             

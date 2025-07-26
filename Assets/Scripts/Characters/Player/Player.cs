@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(InputReader), typeof(Mover), typeof(PlayerAnimator))]
 [RequireComponent(typeof(CollisionHandlers), (typeof(PlayerAttacker)))]
     public class Player : MonoBehaviour
     {
+        public event Action Died;
+        
         [SerializeField] private int _maxHealth = 20;
+        [SerializeField] private HealthBar _healthBar;
         
         private Mover _mover;
         private InputReader _input;
@@ -22,19 +26,27 @@ using UnityEngine;
 
         private void Awake()
         {
-            _health = new(_maxHealth);  
+            _health = new(_maxHealth); 
+            _healthBar.Initialize(_health);
             
             _mover = GetComponent<Mover>();
             _input = GetComponent<InputReader>();
             _animator = GetComponent<PlayerAnimator>();
             _collisionHandlers = GetComponent<CollisionHandlers>();
             _attacker = GetComponent<PlayerAttacker>();
+            
+        }
+
+        private void OnDied()
+        {
+            Died?.Invoke();
         }
 
         private void OnEnable()
         {
             _collisionHandlers.InteractableObjectIsNear += OnInteractableObjectIsNear;
             _health.TakingDamage += OnTakingDamage;
+            _health.Died += OnDied;
         }
 
 
@@ -42,10 +54,13 @@ using UnityEngine;
         {
             _collisionHandlers.InteractableObjectIsNear -= OnInteractableObjectIsNear;
             _health.TakingDamage -= OnTakingDamage;
+            _health.Died -= OnDied;
         }
 
         private void FixedUpdate()
         {
+            if (TimeManager.IsPaused) return;
+            
             _mover.Move(_input.DirectionX, _input.DirectionY);
             _attacker.ChangeDirectionForAttack(_input.DirectionX, _input.DirectionY);
             ChangeDirectionForHit(_input.DirectionX, _input.DirectionY);
@@ -76,7 +91,6 @@ using UnityEngine;
         public void ApplyDamage(int damage)
         {
             _health.ApplyDamage(damage);
-            Debug.Log(_health.CurrentHealth);
         }
 
         private void OnTakingDamage()

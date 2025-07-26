@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
         [SerializeField] private float _maxSqrDistance = 0.03f;
         [SerializeField] private int _maxHealth = 5;
         [SerializeField] private EnemyAnimationEvent _enemyAnimationEvent;
+        [SerializeField] private HealthBar _healthBar;
         
         private EnemyStateMachine _stateMachine;
         private Health _health;
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
         private void Awake()
         {
             _health = new(_maxHealth);
+            _healthBar.Initialize(_health);
         }
 
         private void Start()
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour
 
         private void FixedUpdate()
         {
+            if (TimeManager.IsPaused) return;
+            
             _stateMachine.Update();
         }
 
